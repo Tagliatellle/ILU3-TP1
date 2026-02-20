@@ -7,4 +7,9 @@ public class Borne extends Carte {
 		this.km = km;
 	}
 
+	@Override
+	public String toString() {
+		return km + "KM";
+	}
+
 }
