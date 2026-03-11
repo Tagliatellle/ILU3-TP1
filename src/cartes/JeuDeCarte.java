@@ -38,4 +38,20 @@ public class JeuDeCarte {
 
 		return jeu;
 	}
+	
+	public boolean checkCount() {
+		
+		Carte[] cartes = this.donnerCartes();
+		
+		int indice = 0;
+		for (int i = 0; i<this.typesDeCartes.length ; i++) {
+			for (int count = 0 ; count<this.typesDeCartes[i].getNbExemplaires(); count++) {
+				if (!cartes[indice].equals(this.typesDeCartes[i].getCarte())) {
+					return false;
+				}
+				indice++;
+			}
+		}
+		return true;
+	}
 }

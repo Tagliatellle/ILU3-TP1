@@ -41,6 +41,7 @@ public class TestJeuDeCartes {
 
 		JeuDeCarte jeu = new JeuDeCarte(config);
 		System.out.println(jeu.affichageJeuDeCartes());
+		System.out.println(jeu.checkCount());
 
 	}
 

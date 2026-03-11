@@ -4,8 +4,8 @@ import cartes.Attaque;
 import cartes.Borne;
 import cartes.Carte;
 import cartes.Parade;
-import cartes.Probleme;
 import cartes.Type;
+import cartes.JeuDeCarte;
 
 public class TestMethodeEquals {
 
@@ -30,7 +30,6 @@ public class TestMethodeEquals {
 			System.out.println("Feu rouge = Feu vert test FALSE : pass\n");
 		}
 		
-
 	}
 
 }
