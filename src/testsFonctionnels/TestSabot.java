@@ -1,23 +1,23 @@
 package testsFonctionnels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cartes.Attaque;
 import cartes.Borne;
 import cartes.Botte;
 import cartes.Configuration;
 import cartes.DebutLimite;
 import cartes.FinLimite;
-import cartes.JeuDeCarte;
 import cartes.Parade;
 import cartes.Type;
+import jeu.Sabot;
+import cartes.Carte;
 
-public class TestJeuDeCartes {
-
-	public TestJeuDeCartes() {
-		// TODO Auto-generated constructor stub
-	}
+public class TestSabot {
 
 	public static void main(String[] args) {
-
+		
 		Configuration[] config = new Configuration[19];
 		config[0] = new Configuration(new Borne(25), 10);
 		config[1] = new Configuration(new Borne(50), 10);
@@ -38,9 +38,20 @@ public class TestJeuDeCartes {
 		config[16] = new Configuration(new Botte(Type.ESSENCE), 1);
 		config[17] = new Configuration(new Botte(Type.CREVAISON), 1);
 		config[18] = new Configuration(new Botte(Type.ACCIDENT), 1);
-
-		JeuDeCarte jeu = new JeuDeCarte(config);
-		System.out.println(jeu.affichageJeuDeCartes());
+		
+		List<Carte> sabot = new ArrayList<Carte>();
+		
+		for (int i=0 ; i<19 ; i++) {
+			for (int x = 0 ; x<config[i].getNbExemplaires();x++) {
+				sabot.add(config[i].getCarte());
+			}
+		}
+		
+		Sabot jeu = new Sabot(sabot);
+		while (!jeu.estVide()) {
+			Carte carte = jeu.piocher();
+			System.out.println("je pioche "+carte.toString());
+		}
 
 	}
 
