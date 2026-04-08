@@ -1,23 +1,25 @@
 package testsFonctionnels;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import cartes.Attaque;
 import cartes.Borne;
 import cartes.Botte;
+import cartes.Carte;
 import cartes.Configuration;
 import cartes.DebutLimite;
 import cartes.FinLimite;
 import cartes.JeuDeCartes;
 import cartes.Parade;
 import cartes.Type;
+import utils.GestionCartes;
 
-public class TestJeuDeCartes {
-
-	public TestJeuDeCartes() {
-		// TODO Auto-generated constructor stub
-	}
+public class TestUtils {
 
 	public static void main(String[] args) {
-
+		
 		Configuration[] config = new Configuration[19];
 		config[0] = new Configuration(new Borne(25), 10);
 		config[1] = new Configuration(new Borne(50), 10);
@@ -38,11 +40,22 @@ public class TestJeuDeCartes {
 		config[16] = new Configuration(new Botte(Type.ESSENCE), 1);
 		config[17] = new Configuration(new Botte(Type.CREVAISON), 1);
 		config[18] = new Configuration(new Botte(Type.ACCIDENT), 1);
-
+		
 		JeuDeCartes jeu = new JeuDeCartes();
-		System.out.println(jeu.affichageJeuDeCartes());
-		System.out.println(jeu.checkCount());
-
+		List<Carte> listeCarteNonMelangee = new LinkedList<>();
+		for (Carte carte : jeu.donnerCartes()) {
+			listeCarteNonMelangee.add(carte);
+		}
+		
+		List<Carte> listeCartes = new ArrayList<>(listeCarteNonMelangee);
+		System.out.println(listeCartes);
+		listeCartes = GestionCartes.melanger(listeCartes);
+		System.out.println(listeCartes);
+		System.out.println(
+				"liste mélangée sans erreur ? " + GestionCartes.verifierMelange(listeCarteNonMelangee, listeCartes));
+		listeCartes = GestionCartes.rassembler(listeCartes);
+		System.out.println(listeCartes);
+		System.out.println("liste rassemblée sans erreur ? " + GestionCartes.verifierRassemblement(listeCartes));
 	}
 
 }

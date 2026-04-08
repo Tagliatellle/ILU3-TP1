@@ -5,7 +5,7 @@ import cartes.Borne;
 import cartes.Carte;
 import cartes.Parade;
 import cartes.Type;
-import cartes.JeuDeCarte;
+import cartes.JeuDeCartes;
 
 public class TestMethodeEquals {
 
