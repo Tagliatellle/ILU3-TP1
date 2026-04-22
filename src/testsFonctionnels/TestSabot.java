@@ -1,58 +1,62 @@
 package testsFonctionnels;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
-import cartes.Attaque;
-import cartes.Borne;
 import cartes.Botte;
-import cartes.Configuration;
-import cartes.DebutLimite;
-import cartes.FinLimite;
-import cartes.Parade;
-import cartes.Type;
-import jeu.Sabot;
 import cartes.Carte;
+import cartes.JeuDeCartes;
+import jeu.Sabot;
 
 public class TestSabot {
+	JeuDeCartes jeu = new JeuDeCartes();
+	Sabot sabot = new Sabot(jeu.donnerCartes());
+
+	// 4.2.a
+	public void questionA() {
+
+		while (!sabot.estVide()) {
+			Carte carte = sabot.piocher();
+			System.out.println("Je pioche " + carte);
+		}
+//		Console :
+//		Je pioche Accident
+//		Je pioche Accident
+//		Je pioche Accident
+//		Je pioche R�paration
+//		Je pioche R�paration
+//		Je pioche R�paration
+//		Je pioche As du volant
+	}
+
+	// 4.2.b
+	public void questionB() {
+		for (Iterator<Carte> iterator = sabot.iterator(); iterator.hasNext();) {
+			System.out.println("Je pioche " + iterator.next());
+			iterator.remove();
+		}
+	}
+
+	// 4.2.c
+	public void questionC() {
+		Carte cartePiochee = sabot.piocher();
+		System.out.println("Je pioche " + cartePiochee);
+		for (Iterator<Carte> iterator = sabot.iterator(); iterator.hasNext();) {
+			Carte carte = iterator.next();
+			System.out.println("Je pioche " + carte);
+			iterator.remove();
+			cartePiochee = sabot.piocher();
+			sabot.ajouterCartes(new Botte(cartes.Type.ACCIDENT));
+		}
+		Iterator<Carte> iterator = sabot.iterator();
+		System.out.println("\nLa pioche contient encore des cartes ? " + iterator.hasNext());
+	}
 
 	public static void main(String[] args) {
-		
-		Configuration[] config = new Configuration[19];
-		config[0] = new Configuration(new Borne(25), 10);
-		config[1] = new Configuration(new Borne(50), 10);
-		config[2] = new Configuration(new Borne(75), 10);
-		config[3] = new Configuration(new Borne(100), 12);
-		config[4] = new Configuration(new Borne(200), 4);
-		config[5] = new Configuration(new Parade(Type.FEU), 14);
-		config[6] = new Configuration(new FinLimite(), 6);
-		config[7] = new Configuration(new Parade(Type.ESSENCE), 6);
-		config[8] = new Configuration(new Parade(Type.CREVAISON), 6);
-		config[9] = new Configuration(new Parade(Type.ACCIDENT), 6);
-		config[10] = new Configuration(new Attaque(Type.FEU), 5);
-		config[11] = new Configuration(new DebutLimite(), 5);
-		config[12] = new Configuration(new Attaque(Type.ESSENCE), 3);
-		config[13] = new Configuration(new Attaque(Type.CREVAISON), 3);
-		config[14] = new Configuration(new Attaque(Type.ACCIDENT), 3);
-		config[15] = new Configuration(new Botte(Type.FEU), 1);
-		config[16] = new Configuration(new Botte(Type.ESSENCE), 1);
-		config[17] = new Configuration(new Botte(Type.CREVAISON), 1);
-		config[18] = new Configuration(new Botte(Type.ACCIDENT), 1);
-		
-		List<Carte> sabot = new ArrayList<Carte>();
-		
-		for (int i=0 ; i<19 ; i++) {
-			for (int x = 0 ; x<config[i].getNbExemplaires();x++) {
-				sabot.add(config[i].getCarte());
-			}
-		}
-		
-		Sabot jeu = new Sabot(sabot);
-		while (!jeu.estVide()) {
-			Carte carte = jeu.piocher();
-			System.out.println("je pioche "+carte.toString());
-		}
-
+		TestSabot testPioche = new TestSabot();
+//		testPioche.questionA();
+//		testPioche.questionB();
+		testPioche.questionC();
 	}
 
 }
+
