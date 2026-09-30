@@ -53,9 +53,6 @@ public class Sabot implements Iterable<Carte> {
 
 		@Override
 		public boolean hasNext() {
-			while (indiceIterateur < cartes.length && cartes[indiceIterateur] == null) {
-				indiceIterateur++;
-			}
 			return indiceIterateur < cartes.length;
 		}
 
@@ -80,7 +77,7 @@ public class Sabot implements Iterable<Carte> {
 			cartes[indiceIterateur - 1] = null;
 			nbCartes--;
 			nbOperation++;
-			nbOperationReference = nbOperation;
+			nbOperationReference++;
 			nextEffectue = false;
 		}
 
