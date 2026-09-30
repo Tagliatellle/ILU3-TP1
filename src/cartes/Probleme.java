@@ -13,6 +13,7 @@ public abstract class Probleme extends Carte {
 
 	@Override
 	public boolean equals(Object obj) {
-		return this.getClass().equals(obj.getClass());
+		return obj != null && obj.getClass() == this.getClass();
+		
 	}
 }

@@ -61,26 +61,30 @@ public class Sabot implements Iterable<Carte> {
 			verificationConcurrence();
 			if (hasNext()) {
 				Carte carte = cartes[indiceIterateur];
-				nextEffectue = true;
 				indiceIterateur++;
+				nextEffectue = true;
 				return carte;
+			} else {
+				throw new NoSuchElementException();
 			}
-			throw new NoSuchElementException();
 		}
 
+		@Override
 		public void remove() {
 			verificationConcurrence();
-			if (!nextEffectue) {
+			if (nbCartes < 1 || !nextEffectue) {
 				throw new IllegalStateException();
 			}
-
-			cartes[indiceIterateur - 1] = null;
-			nbCartes--;
-			nbOperation++;
-			nbOperationReference++;
+			
+			for (int i = indiceIterateur ; i < nbCartes-1 ; i++) {
+				cartes[i] = cartes[i+1];
+			}
+			
 			nextEffectue = false;
+			indiceIterateur--;
+			nbCartes--;
 		}
-
+		
 		private void verificationConcurrence() {
 			if (nbOperation != nbOperationReference) {
 				throw new ConcurrentModificationException();

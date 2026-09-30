@@ -55,7 +55,7 @@ public class TestSabot {
 		TestSabot testPioche = new TestSabot();
 //		testPioche.questionA();
 //		testPioche.questionB();
-		testPioche.questionC();
+//		testPioche.questionC();
 	}
 
 }
